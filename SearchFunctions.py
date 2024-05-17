@@ -1,11 +1,13 @@
 import requests
 import time
 
+
 class SearchFunctions:
     def __init__(self):
+        self.apikey = 0
         self.playerNameCache = {}
         self.teamNameCache = {}
-        url = "https://api.sportradar.com/nfl/official/trial/v7/en/league/teams.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+        url = "https://api.sportradar.com/nfl/official/trial/v7/en/league/teams.json?api_key=" + self.apikey
 
         headers = {"accept": "application/json"}
 
@@ -18,7 +20,7 @@ class SearchFunctions:
     def playerFinder(self, name="name", playerid="id"):
         if name != "name":
             if name in self.playerNameCache:
-                url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/" + self.playerNameCache[name] + "/profile.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+                url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/" + self.playerNameCache[name] + "/profile.json?api_key=" + self.apikey
 
                 headers = {"accept": "application/json"}
 
@@ -30,7 +32,7 @@ class SearchFunctions:
                     print(team)
                     #time.sleep(1)
                     teamid = self.teamNameCache[team]
-                    url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + teamid + "/full_roster.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+                    url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + teamid + "/full_roster.json?api_key="  + self.apikey
 
                     headers = {"accept": "application/json"}
 
@@ -43,7 +45,7 @@ class SearchFunctions:
                         if player["name"] == name:
                             time.sleep(.5)
                             self.playerNameCache[name] = player["id"]
-                            url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/" + player["id"] + "/profile.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+                            url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/" + player["id"] + "/profile.json?api_key="  + self.apikey
 
                             headers = {"accept": "application/json"}
 
@@ -52,7 +54,7 @@ class SearchFunctions:
                 return "No Player Found."
 
         elif playerid != "id":
-            url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/11cad59d-90dd-449c-a839-dddaba4fe16c/profile.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+            url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/11cad59d-90dd-449c-a839-dddaba4fe16c/profile.json?api_key="  + self.apikey
 
             headers = {"accept": "application/json"}
 
@@ -68,7 +70,7 @@ class SearchFunctions:
 
     def teamFinder(self, name="name", teamid="id"):
         if name in self.teamNameCache:
-            url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + self.teamNameCache[name] + "/profile.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+            url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + self.teamNameCache[name] + "/profile.json?api_key="  + self.apikey
 
             headers = {"accept": "application/json"}
 
@@ -78,7 +80,7 @@ class SearchFunctions:
                 return "Retrival Error"
             return teamData
         elif teamid != "id":
-            url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + teamid + "/profile.json?api_key=Fkl04nxtzF1ATYAqI0O9z1IwWXnieHna1RQEFsjL"
+            url = "https://api.sportradar.com/nfl/official/trial/v7/en/teams/" + teamid + "/profile.json?api_key="  + self.apikey
 
             headers = {"accept": "application/json"}
 
