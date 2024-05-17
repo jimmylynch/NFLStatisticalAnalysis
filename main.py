@@ -19,4 +19,4 @@ if __name__ == '__main__':
 
     newrun = UserInterface.UserInterface()
     newrun.userPlayerFinder()
-    newvar = 1
+    newvar = 0
