@@ -15,7 +15,6 @@ if __name__ == '__main__':
     import requests
     import json
     import UserInterface
-    import SearchFunctions
 
     newrun = UserInterface.UserInterface()
     newrun.userPlayerFinder()
