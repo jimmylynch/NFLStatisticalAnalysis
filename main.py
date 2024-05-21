@@ -15,7 +15,9 @@ if __name__ == '__main__':
     import requests
     import json
     import UserInterface
+    import requests
+
 
     newrun = UserInterface.UserInterface()
-    newrun.userPlayerFinder()
-    newvar = 0
+    while 1:
+        newrun.userPlayerFinder()
