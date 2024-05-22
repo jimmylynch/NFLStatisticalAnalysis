@@ -22,9 +22,12 @@ class UserInterface:
         for season in data['seasons']:
             if str(season['year']) == str(fetch):
                 for team in season['teams']:
-                    for stat in team["statistics"]: # NEED TO KEEP INTERATING THROUGH STAT DICTIONARIES SO EACH STAT PRINTS ON NEW LINE
-                        print(stat + ": " + str(team["statistics"][stat]))
-                    #print(item + ": " + str(season['teams']['statistics'][item]))
+                    for statgroup in team["statistics"]: # NEED TO KEEP INTERATING THROUGH STAT DICTIONARIES SO EACH STAT PRINTS ON NEW LINE
+                        if type(team["statistics"][statgroup]) == dict:
+                            for stat in team["statistics"][statgroup]:
+                                print(stat + ": " + str(team["statistics"][statgroup][stat]))
+                            continue
+                        print(statgroup + ": " + str(team["statistics"][statgroup]))
 
 
 
