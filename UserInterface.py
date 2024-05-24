@@ -18,7 +18,7 @@ class UserInterface:
             print("item: " + item)
             print("value: " + str(data[item]))
             print("-------------------------")
-        fetch = input("Please input season you wish to view.")
+        fetch = input("Please input season you wish to view:")
         for season in data['seasons']:
             if str(season['year']) == str(fetch):
                 for team in season['teams']:
