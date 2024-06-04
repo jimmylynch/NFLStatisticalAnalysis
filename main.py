@@ -16,8 +16,17 @@ if __name__ == '__main__':
     import json
     import UserInterface
     import requests
-
-
-    newrun = UserInterface.UserInterface()
-    while 1:
-        newrun.userPlayerFinder()
+    import morsecodesolver
+    #vals = ".--.-...---...-...---..-."
+    vals = ".-..---...-...---...-.--."
+    morsecodesolver.morsecode("",vals)
+    newvals = ""
+    for n in range(0,len(vals)-1):
+        if vals[n] == ".":
+            newvals += "-"
+        else:
+            newvals += "."
+    #morsecodesolver.morsecode("",newvals)
+   # newrun = UserInterface.UserInterface()
+    #while 1:
+     #   newrun.userPlayerFinder()
