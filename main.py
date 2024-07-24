@@ -11,13 +11,4 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    import time
-    import requests
-    import json
-    import UserInterface
-    import requests
 
-
-    newrun = UserInterface.UserInterface()
-    while 1:
-        newrun.userPlayerFinder()
