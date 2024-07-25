@@ -23,4 +23,4 @@ if __name__ == '__main__':
     #print(draftAnalyisis_RB("Kyren Williams"))
     #print(playerFinderbyName("Christian McCaffrey","RB"))
     #getPlayerStats("Justin Herbert","REG",2023,"QB",True)
-    print(draftAnalyisis_RB("Justin Herbert"))
+    print(draftAnalyisis_RB("Gus Edwards"))

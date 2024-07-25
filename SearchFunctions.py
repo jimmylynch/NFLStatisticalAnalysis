@@ -130,10 +130,8 @@ def getPlayerStats(playername,seasontype,year,position,output):
 
 # noinspection PyTypeChecker
 def draftAnalyisis_RB(playername):
-    data = playerFinderbyName(playername,"RB")
-    if data["position"] != "RB":
-        return "Not an RB"
-    statistics = getPlayerStats(playername,"REG",2023,False)
+
+    statistics = getPlayerStats(playername,"REG",2023,"RB",False)
     output_stats = {"name" : playername,
                     "RuAtt/game": round(statistics["rushing"]["attempts"] / statistics["games_played"],2),
                     "Tgts/game": round(statistics["receiving"]["targets"] / statistics["games_played"],2),
