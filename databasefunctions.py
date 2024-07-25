@@ -1,8 +1,9 @@
 import pymongo
 from bson.json_util import dumps
 from pymongo import MongoClient
+from api_key import mongoDBaccess
 from datetime import datetime, timedelta
-cluster = MongoClient("mongodb+srv://lynchj1:Jl031008!!!@nflstatsdatabase.k4qqvqa.mongodb.net/?retryWrites=true&w=majority&appName=NFLStatsDatabase")
+cluster = MongoClient(mongoDBaccess)
 
 
 # db and collection are the parameters used to get to desired section of database
@@ -78,7 +79,11 @@ def findManyPost(db, collection, parameter, value):
     database = cluster[db]
     coll = database[collection]
     try:
-        results = coll.find({parameter: value})
+        # case to return all data
+        if parameter == "" or value == "":
+            results = coll.find({})
+        else:
+            results = coll.find({parameter: value})
         print("Search success.")
         data = []
         for result in results:
