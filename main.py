@@ -17,6 +17,10 @@ import time
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     a = 1
-    getPlayerStats("Justin Herbert","REG",2023)
+    #getPlayerStats("Justin Tucker","REG",2023,True)
     #print(playerFinderbyName("Tyron Smith"))
-
+    #print(draftAnalyisis_RB("Christian McCaffrey"))
+    #print(draftAnalyisis_RB("Kyren Williams"))
+    #print(playerFinderbyName("Christian McCaffrey","RB"))
+    #getPlayerStats("Justin Herbert","REG",2023,"QB",True)
+    print(draftAnalyisis_RB("Gus Edwards"))

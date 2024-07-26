@@ -14,7 +14,7 @@ def addManyPost(db, collection, posts):
     coll = database[collection]
     try:
         result = coll.insert_many(posts, ordered=False)
-        print("Posts created.")
+        return "success"
     except pymongo.errors.BulkWriteError as e:
         print(e.details['writeErrors'][0]['errmsg'])
 
@@ -47,9 +47,9 @@ def deleteManyPost(db, collection, parameter, value):
     coll = database[collection]
     try:
         coll.delete_many({parameter: value})
-        print("Posts deleted.")
+        return "success"
     except:
-        print("Deletion failed.")
+        return "fail"
 
 
 # Example:
@@ -63,9 +63,9 @@ def deletePost(db, collection, parameter, value):
     coll = database[collection]
     try:
         coll.delete_one({parameter: value})
-        print("Post deleted.")
+        return "success"
     except:
-        print("Deletion failed.")
+        return "fail"
 
 
 # Example:
@@ -84,13 +84,12 @@ def findManyPost(db, collection, parameter, value):
             results = coll.find({})
         else:
             results = coll.find({parameter: value})
-        print("Search success.")
         data = []
         for result in results:
             data.append(result)
         return data
     except:
-        print("Search failed.")
+        return "fail"
 
 
 # Example:
@@ -127,9 +126,9 @@ def updateManyPost(db, collection, search_parameter, search_value, new_parameter
     coll = database[collection]
     try:
         result = coll.update_many({search_parameter: search_value}, {"$set": {new_parameter: new_value}})
-        print("Posts updated.")
+        return "success"
     except:
-        print("Update failed.")
+        return "fail"
 
 
 # Example:
@@ -145,7 +144,7 @@ def updatePost(db, collection, search_parameter, search_value, new_parameter, ne
     coll = database[collection]
     try:
         coll.update_one({search_parameter: search_value}, {"$set": {new_parameter: new_value}})
-        print("Post updated.")
+        return "success"
     except:
-        print("Update failed.")
+        return "fail"
 
