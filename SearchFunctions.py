@@ -2,18 +2,24 @@ import requests
 import time
 from api_key import apikey
 from databasefunctions import *
+import pandas
+
 
 
 def cachePlayer(id):
+    time.sleep(2)
     url = "https://api.sportradar.com/nfl/official/trial/v7/en/players/" + id + "/profile.json?api_key=" + apikey
 
     headers = {"accept": "application/json"}
 
     response = requests.get(url, headers=headers)
-    data = response.json()
-    data["_id"] = data.pop("id")
-    addPost("Playerdata", data["position"], data)
-    return data
+    try:
+        data = response.json()
+        data["_id"] = data.pop("id")
+        addPost("Playerdata", data["position"], data)
+        return data
+    except:
+        return cachePlayer(id)
 
 
 def playerFinderbyName(playername,position = None):
@@ -132,9 +138,21 @@ def getPlayerStats(playername,seasontype,year,position,output):
 def draftAnalyisis_RB(playername):
 
     statistics = getPlayerStats(playername,"REG",2023,"RB",False)
+    if statistics == "No Player Found.":
+        return statistics
     output_stats = {"name" : playername,
                     "RuAtt/game": round(statistics["rushing"]["attempts"] / statistics["games_played"],2),
                     "Tgts/game": round(statistics["receiving"]["targets"] / statistics["games_played"],2),
                     "YFS/game":round((statistics["rushing"]["yards"]+statistics["receiving"]["yards"])/statistics["games_played"],2),}
     output_stats["Touches/game"] = round(output_stats["RuAtt/game"] + statistics["receiving"]["receptions"] / statistics["games_played"],2)
     return output_stats
+
+def getAllPositionStats(position):
+    rosters = findManyPost("Teamdata", "Rosters", "", "")
+    for team in rosters:
+        for player in team["roster"]:
+            if player["position"] == position:
+                cachecheck = findPost("Playerdata",position,"_id",player["id"])
+                if cachecheck is None:
+                    data = cachePlayer(player["id"])
+
